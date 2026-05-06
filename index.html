@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Reminders</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using Inter font to match the bold typography from the inspiration image -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="popup-container">
+        
+        <div class="urgent-badge">
+            <div class="red-dot"></div>
+            <span>URGENT</span>
+        </div>
+
+        <div class="popup-header">
+            <h1 class="giant-title">Urgent<br>Deadlines!!</h1>
+        </div>
+        
+        <div class="deadline-list" id="deadlineList">
+            <!-- Items will be injected here by JS -->
+        </div>
+
+        <button class="cta-toggle" id="toggleAddBtn">+ Add Deadline</button>
+
+        <div class="add-new-section hidden" id="addSection">
+            <input type="text" id="taskName" placeholder="Task Name">
+            <input type="datetime-local" id="taskDeadline">
+            <button id="addTaskBtn">Save</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

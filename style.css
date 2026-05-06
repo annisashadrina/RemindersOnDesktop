@@ -1,0 +1,245 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    color: #ffffff;
+    background: transparent;
+}
+
+/* Removed glow-background to prevent square edges */
+
+.popup-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 320px;
+    background: rgba(15, 10, 10, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), 0 30px 60px rgba(220, 10, 30, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    -webkit-app-region: drag;
+    z-index: 1;
+}
+
+/* Urgent Badge */
+.urgent-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #000;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    border-radius: 20px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    animation: urgentPulseBadge 1.5s infinite alternate;
+}
+
+.urgent-badge span {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #ff3333;
+}
+
+.red-dot {
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff0000;
+    animation: blink 1s infinite;
+}
+
+@keyframes urgentPulseBadge {
+    0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border-color: rgba(255, 0, 0, 0.4); }
+    100% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 0, 0, 0.8); border-color: rgba(255, 0, 0, 1); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.popup-header {
+    margin-top: 10px;
+}
+
+/* Giant Bold Typography */
+.giant-title {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.deadline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+    -webkit-app-region: no-drag;
+}
+
+/* Scrollbar styling */
+.deadline-list::-webkit-scrollbar { width: 4px; }
+.deadline-list::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
+.deadline-list::-webkit-scrollbar-thumb { background: rgba(255, 0, 0, 0.4); border-radius: 10px; }
+
+.deadline-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    position: relative;
+}
+
+.deadline-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 0, 50, 0.4);
+    background: rgba(255, 0, 50, 0.05);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.task-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    padding-right: 15px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 400;
+    -webkit-app-region: no-drag;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.delete-btn:hover {
+    color: #ff3333;
+}
+
+.time-remaining {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff8888;
+    letter-spacing: 0.5px;
+}
+
+.cta-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-app-region: no-drag;
+}
+
+.cta-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.add-new-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    -webkit-app-region: no-drag;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    max-height: 200px;
+    opacity: 1;
+}
+
+.add-new-section.hidden {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: -10px;
+}
+
+.add-new-section input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.add-new-section input:focus {
+    border-color: #ff3333;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.add-new-section button {
+    background: #ff1a1a;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-new-section button:hover {
+    background: #ff3333;
+}
+.add-new-section button:active {
+    transform: scale(0.98);
+}
